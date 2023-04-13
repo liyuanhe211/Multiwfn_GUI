@@ -1,0 +1,7 @@
+.idea
+Temp
+.venv
+Obsolete
+Scripts
+__pycache__
+test.py
