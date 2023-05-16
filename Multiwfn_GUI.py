@@ -39,7 +39,9 @@ if platform.system() == 'Windows':
 
 if __name__ == '__main__':
     pyqt_ui_compile('Multiwfn_GUI.py')
+    pyqt_ui_compile('Multiwfn_Gui_Pushbutton.py')
     from UI.Multiwfn_GUI import Ui_Multiwfn_GUI_Form
+    from UI.Multiwfn_Gui_Pushbutton import Ui_Multiwfn_Pushbutton
 
 
 class HighlightRule:
@@ -57,11 +59,6 @@ class PythonHighlighter(QSyntaxHighlighter):
         self.keyword_format = QTextCharFormat()
         self.keyword_format.setForeground(QColor("#D0CE00"))
         self.keyword_format.setBackground(QColor("#1E1E1E"))
-        # self.keyword_format.setFontWeight(Qfont.Bold)
-
-        self.reset_rules()
-
-    def reset_rules(self):
         rules = []
 
         pattern = re.compile(r'^>>>(.*)')
@@ -106,6 +103,15 @@ class Output_textEdit(QTextEdit):
         super().keyPressEvent(event)
 
 
+class Multiwfn_Pushbutton(Ui_Multiwfn_Pushbutton,QtWidgets.QWidget,Qt_Widget_Common_Functions):
+    def __init__(self,text,is_python_script):
+        super(self.__class__, self).__init__()
+        self.setupUi(self)
+        self.show()
+        self.pushButton.setText(text)
+        self.pushButton.setIcon()
+
+
 class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
     tab_signal = pyqtSignal()
 
@@ -126,6 +132,16 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         # self.set_font(self.output_textEdit, 'self.output_textEdit')
         # self.set_font(self.input_lineEdit, 'self.input_lineEdit')
 
+        self.all_sessions_inputs = []
+        self.all_sessions_outputs = []
+        self.current_session_inputs = []
+        self.current_session_outputs = []
+        self.all_sessions_inputs.append(self.current_session_inputs)
+        self.all_sessions_outputs.append(self.current_session_outputs)
+
+        self.macro_pushbuttons = []
+        self.macro_files = []
+
         self.process = QProcess()
         self.process.start(multiwfn_executable)
         connect_once(self.process.readyReadStandardOutput, lambda process=self.process: self.write_output(self.process))
@@ -133,29 +149,24 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         connect_once(self.output_textEdit.tab_signal, lambda: self.input_lineEdit.setFocus())
         connect_once(self.input_lineEdit.returnPressed, self.write_input)
 
-    def set_font(self, target, target_name):
-        new_font = QFont()
-        if target_name + '_font' not in self.config:
-            self.config[target_name + '_font'] = (self.default_font_name, self.default_font_size, self.default_style_sheet)
-        self.save_config()
-        font_name, font_size, style_sheet = self.load_config(target_name + '_font')
-        new_font.setFamily(font_name)
-        new_font.setPointSize(font_size)
-        target.setFont(new_font)
-        target.setStyleSheet(style_sheet)
+        self.load_macro_list()
 
-    def save_font(self, target_name, font_name, font_size, style_sheet):
-        self.config[target_name + '_font'] = (font_name, font_size, style_sheet)
-        self.save_config()
+    # def set_font(self, target, target_name):
+    #     new_font = QFont()
+    #     if target_name + '_font' not in self.config:
+    #         self.config[target_name + '_font'] = (self.default_font_name, self.default_font_size, self.default_style_sheet)
+    #     self.save_config()
+    #     font_name, font_size, style_sheet = self.load_config(target_name + '_font')
+    #     new_font.setFamily(font_name)
+    #     new_font.setPointSize(font_size)
+    #     target.setFont(new_font)
+    #     target.setStyleSheet(style_sheet)
+    #
+    # def save_font(self, target_name, font_name, font_size, style_sheet):
+    #     self.config[target_name + '_font'] = (font_name, font_size, style_sheet)
+    #     self.save_config()
 
-    def write_output(self, process):
-
-        if isinstance(process, str):
-            # 把输入的东西写上去
-            text = process
-        else:
-            text = bytes(process.readAllStandardOutput()).decode('gbk')
-            text += bytes(process.readAllStandardError()).decode('gbk')
+    def write_text(self,text):
 
         log_file.write(text)
 
@@ -166,11 +177,23 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
 
         self.output_textEdit.verticalScrollBar().setSliderPosition(self.output_textEdit.verticalScrollBar().maximum())
 
+    def write_output(self,process):
+        text = bytes(process.readAllStandardOutput()).decode('gbk')
+        text += bytes(process.readAllStandardError()).decode('gbk')
+        self.write_text(text)
+
     def write_input(self):
         text = self.input_lineEdit.text()
-        self.write_output("\n\n>>> " + text + '\n\n\n')
+        self.write_text("\n\n>>> " + text + '\n\n\n')
         self.input_lineEdit.setText("")
         self.process.writeData(bytearray(text + "\n", encoding='gbk'))
+
+    def load_macro_list(self):
+        self.macro_files = list_current_folder("./Command_Macros","*.py") + list_current_folder("./Command_Macros","*.txt")
+        self.macro_files.sort()
+        for file in self.macro_files:
+            pushbutton = Ui_Multiwfn_Pushbutton()
+            # pushbutton.pushButton
 
 
 if __name__ == '__main__':
