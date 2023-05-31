@@ -6,133 +6,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1163</width>
-    <height>479</height>
+    <width>1362</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Multiwfn GUI</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color: #DCDCDC; 
-                                      background-color: #1E1E1E;
-                                      font: 10pt &quot;Consolas&quot;;</string>
+   <string notr="true">QWidget {
+    color: #DCDCDC;
+    background-color: #1E1E1E;
+    font: 10pt &quot;Consolas&quot;;
+}
+</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0,3,0,1,0">
-     <item row="3" column="0">
-      <widget class="QLineEdit" name="input_lineEdit_2">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-         <italic>false</italic>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">color: #DCDCDC; 
-                         background-color: #1E1E1E;
-                         font: 10pt &quot;Consolas&quot;;
-border: 1px solid #1E1E1E;
-border-bottom-color: #DCDCDC;</string>
-       </property>
-       <property name="inputMask">
-        <string/>
-       </property>
-       <property name="frame">
-        <bool>true</bool>
-       </property>
-       <property name="placeholderText">
-        <string>Search command...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(60, 63, 65);</string>
-       </property>
-       <property name="text">
-        <string>Save current commands</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0">
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Input file:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Launch GView</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>20</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Command history</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QTextEdit" name="textEdit_3">
-       <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
+    <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,1,0,0,0,1,0,0,0,0" columnstretch="3,0,6,0,4">
+     <item row="7" column="2">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLineEdit" name="input_lineEdit">
@@ -159,43 +51,30 @@ border-bottom-color: #DCDCDC;</string>
          <property name="frame">
           <bool>true</bool>
          </property>
+         <property name="placeholderText">
+          <string>Input command...</string>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="send_command_pushButton">
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>30</height>
+           <height>25</height>
           </size>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: rgb(60, 63, 65);</string>
          </property>
          <property name="text">
-          <string>File path</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Save output</string>
+          <string>Send</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="0" column="3" rowspan="6">
+     <item row="0" column="3" rowspan="10">
       <widget class="Line" name="line_3">
        <property name="styleSheet">
         <string notr="true">color: #DCDCDC;</string>
@@ -208,7 +87,416 @@ border-bottom-color: #DCDCDC;</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2" rowspan="4">
+     <item row="0" column="1" rowspan="10">
+      <widget class="Line" name="line_2">
+       <property name="styleSheet">
+        <string notr="true">color: #DCDCDC;</string>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="2">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="load_file_path_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Load file path</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_10">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Save output</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_12">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Save output as</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="launch_new_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Launch New</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="reboot_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Reboot</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLineEdit" name="input_lineEdit_2">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border: 1px solid #1E1E1E;
+border-bottom-color: #DCDCDC;</string>
+       </property>
+       <property name="inputMask">
+        <string/>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="placeholderText">
+        <string>Search command...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(60, 63, 65);</string>
+       </property>
+       <property name="text">
+        <string>Save commands</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Command history</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0">
+       <item>
+        <widget class="QLineEdit" name="input_file_lineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 1px solid #1E1E1E;
+border-bottom-color: #DCDCDC;</string>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="open_GaussView_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>GaussView</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLineEdit" name="search_macros_lineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 1px solid #1E1E1E;
+border-bottom-color: #DCDCDC;</string>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Search Macros...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="show_macro_list_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);
+</string>
+         </property>
+         <property name="text">
+          <string>Back to Macro list</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QTextEdit" name="command_history_textEdit">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="4">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QPushButton" name="refresh_macro_list_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Refresh</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="execute_macro_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Execute</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="step_forward_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Step Forward</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="batch_run_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Batch run</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="4" rowspan="4">
+      <widget class="QTextEdit" name="macro_content_textEdit">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit { line-height: 2; }</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="lineWrapMode">
+        <enum>QTextEdit::NoWrap</enum>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2" rowspan="6">
       <widget class="QWidget" name="output_widget" native="true">
        <layout class="QVBoxLayout" name="output_verticalLayout">
         <property name="spacing">
@@ -229,7 +517,7 @@ border-bottom-color: #DCDCDC;</string>
        </layout>
       </widget>
      </item>
-     <item row="4" column="0" rowspan="2">
+     <item row="5" column="0" rowspan="5">
       <widget class="QScrollArea" name="search_command_selector_scrollArea">
        <property name="focusPolicy">
         <enum>Qt::ClickFocus</enum>
@@ -245,67 +533,15 @@ border-bottom-color: #DCDCDC;</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>223</width>
-          <height>173</height>
+          <width>303</width>
+          <height>281</height>
          </rect>
         </property>
        </widget>
       </widget>
      </item>
-     <item row="0" column="1" rowspan="6">
-      <widget class="Line" name="line_2">
-       <property name="styleSheet">
-        <string notr="true">color: #DCDCDC;</string>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QLabel" name="label_6">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Template operation</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Collapse</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="4">
-      <widget class="QScrollArea" name="template_selector_scrollArea">
+     <item row="1" column="4" rowspan="3">
+      <widget class="QScrollArea" name="macro_selector_scrollArea">
        <property name="focusPolicy">
         <enum>Qt::ClickFocus</enum>
        </property>
@@ -315,85 +551,34 @@ border-bottom-color: #DCDCDC;</string>
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
+       <widget class="QWidget" name="macro_selector_widget">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>223</width>
-          <height>170</height>
+          <width>404</width>
+          <height>242</height>
          </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="spacing">
+          <number>3</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
        </widget>
       </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QLabel" name="label_2">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Preview:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4" rowspan="2">
-      <widget class="QTextEdit" name="template_content_textEdit">
-       <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="4">
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Execute</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Batch Run</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </item>
     </layout>
    </item>
@@ -401,10 +586,8 @@ border-bottom-color: #DCDCDC;</string>
  </widget>
  <tabstops>
   <tabstop>input_lineEdit</tabstop>
-  <tabstop>pushButton_7</tabstop>
   <tabstop>input_lineEdit_2</tabstop>
-  <tabstop>pushButton_6</tabstop>
-  <tabstop>pushButton_5</tabstop>
+  <tabstop>open_GaussView_pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

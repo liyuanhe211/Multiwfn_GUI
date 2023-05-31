@@ -14,10 +14,18 @@ from Python_Lib.My_Lib_Stock import *
 import subprocess
 from Lib import *
 
-multiwfn_folder = os.path.join(filename_class(os.path.realpath(__file__)).path, "Multiwfn_exe")
+multiwfn_folder = os.path.join(filename_class(os.path.realpath(__file__)).path, "executable")
 multiwfn_executable = os.path.join(multiwfn_folder, 'Multiwfn.exe')
 os.environ['Multiwfnpath'] = multiwfn_folder
 
+def show_command_list(commands):
+    ret = []
+    for i in commands:
+        if callable(i):
+            ret.append(i.__name__ + "()")
+        else:
+            ret.append(str(i))
+    return ret
 
 def modify_settings_ini_file(multiwfn_folder, items_value_dict: dict):
     settings_ini_path = os.path.join(multiwfn_folder, "settings.ini")

@@ -12,14 +12,18 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Multiwfn_Pushbutton(object):
     def setupUi(self, Multiwfn_Pushbutton):
         Multiwfn_Pushbutton.setObjectName("Multiwfn_Pushbutton")
-        Multiwfn_Pushbutton.resize(104, 30)
+        Multiwfn_Pushbutton.resize(104, 25)
+        Multiwfn_Pushbutton.setStyleSheet("color: #DCDCDC; \n"
+"                                      background-color: #1E1E1E;\n"
+"                                      font: 10pt \"Consolas\";")
         self.horizontalLayout = QtWidgets.QHBoxLayout(Multiwfn_Pushbutton)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.pushButton = QtWidgets.QPushButton(parent=Multiwfn_Pushbutton)
-        self.pushButton.setMinimumSize(QtCore.QSize(0, 30))
-        self.pushButton.setStyleSheet("background-color: rgb(60, 63, 65);")
+        self.pushButton.setMinimumSize(QtCore.QSize(0, 25))
+        self.pushButton.setStyleSheet("background-color: rgb(60, 63, 65);\n"
+"text-align: left;")
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
 

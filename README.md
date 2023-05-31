@@ -1,5 +1,12 @@
 # Launch
-TODO
+Have a python environment (tested on Python 3.9.7) on Windows or Linux, you can build a virtual environment with pipenv by using the provided pipfile:
+
+```commandline
+pip install pipenv
+mkdir .venv
+pipenv sync
+pipenv run python Draw_Energy_Diagram_XML.py
+```
 
 # Features
 
@@ -8,6 +15,7 @@ TODO
  * Programmable automation with output-dependent operations.
  * File selection with GUI (although Multiwfn have native support, most don't know about it).
  * Show input filename in GUI to see which session you are in.
+ * You can drag-drop file into the window to load the filepath
 
 # The GUI
 
@@ -35,7 +43,7 @@ Each line contains the input to Multiwfn and an optional comment divided by `//`
 ### Special tags
 Any line starts with `[Note]` will be omitted. 
 
-By using the special tag `[Input: prompt]` as a line, you will be prompted to input certain text in the GUI. For example, the following macro plots 2D ELF data along a plane defined by three atoms: 
+By using the special tag `[Input] prompt` as a line, you will be prompted to input certain text in the GUI. For example, the following macro plots 2D ELF data along a plane defined by three atoms: 
 <a name="2D_ELF_Example"></a>
 ```TypeScript
 [Note] Plot 2D ELF in a plane defined by three atoms
@@ -44,7 +52,7 @@ By using the special tag `[Input: prompt]` as a line, you will be prompted to in
 1 // Color-filled map
   // Default grid
 4 // Define plane by three atoms
-[Input: Index of three atoms to define the plane, e.g. 3,6,7]
+[Input] Index of three atoms to define the plane, e.g. 3,6,7
 -6 // Export plane plot data
 ```
 Another special tag `[Reboot]` will cause Multiwfn to reboot.
@@ -63,14 +71,15 @@ commands = [4,  # Output and plot specific property in a plane
             1,  # Color-filled map
             "", # Default grid
             4,  # Define plane by three atoms
-            "[Input: Index of three atoms to define the plane, e.g. 3,6,7]",
+            "[Input] Index of three atoms to define the plane, e.g. 3,6,7",
             -6] # Export plane plot data
 ```
-You can fully automate the interaction process by adding function objects into the `commands` list. The function will be called, and should return a string as the command to be fed into Multiwfn.  
 
-Optionally, the function could be fed with two parameters, `previous_inputs`, and `previous_outputs`. Both are tuples, which contain all inputs and outputs of the session. 
+### Advanced scripting
 
-For example, if one have a batch of Gaussian TD missions, and wish to generate NTOs as fchk files for all singlet excited states. Suppose the input files are:
+You can fully automate the interaction process by adding function objects into the `commands` list. The function will be called with two parameters, `previous_inputs`, and `previous_outputs`. Both are tuples, which contain all inputs and outputs of the session. And the function should return a string as the command to be fed into Multiwfn.
+
+For example, if one have a batch of Gaussian TD missions, and wish to generate NTOs as fchk files for all **singlet** excited states. Suppose the input files are:
 ```
 Molecule_1_TD.out
 Molecule_1_TD.fchk
@@ -85,6 +94,10 @@ Molecule_1_TD.NTO_S2.fchk
 Molecule_1_TD.NTO_S3.fchk
 ...
 ```
-To automate this process, one can wrote the following script:
+To automate this, one can refer to [this example script](/Command_Macros/NTO fchk for singlet states.py). In the script, a batch of .fchk file for TD missions was given by clicking the `Batch run` pushbutton.
 
 TODO
+
+可以用return None来要求主程序等待
+
+可以用[Quit]表示退出
