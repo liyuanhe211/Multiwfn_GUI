@@ -73,7 +73,9 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         self.output_textEdit = Output_textEdit(self.output_widget)
         self.output_verticalLayout.addWidget(self.output_textEdit)
 
-        self.macro_selector_scrollArea.setStyleSheet(scroll_bar_stylesheet)
+        self.macro_selector_scrollArea.setStyleSheet(vertical_scroll_bar_stylesheet+horizontal_scroll_bar_stylesheet)
+        self.macro_content_textEdit.setStyleSheet(vertical_scroll_bar_stylesheet+horizontal_scroll_bar_stylesheet)
+        self.command_history_textEdit.setStyleSheet(vertical_scroll_bar_stylesheet+horizontal_scroll_bar_stylesheet)
 
         self.current_round_output = ""  # 记录每次新输入之前的输出，用于合并standard error和standard output
 

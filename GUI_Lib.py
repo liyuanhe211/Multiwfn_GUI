@@ -8,7 +8,7 @@ from Python_Lib.My_Lib_PyQt6 import *
 pyqt_ui_compile('Multiwfn_Gui_Pushbutton.py')
 from UI.Multiwfn_Gui_Pushbutton import Ui_Multiwfn_Pushbutton
 
-scroll_bar_stylesheet = """QScrollBar:vertical {
+vertical_scroll_bar_stylesheet = """QScrollBar:vertical {
                                   background: #303030;
                                   width: 12px;
                               }
@@ -32,6 +32,29 @@ scroll_bar_stylesheet = """QScrollBar:vertical {
                                   background: none;
                               }"""
 
+horizontal_scroll_bar_stylesheet = """QScrollBar:horizontal {
+                                  background: #303030;
+                                  height: 12px;
+                              }
+                              QScrollBar::handle:horizontal {
+                                  background: #A0A0A0;
+                                  min-width: 20px;
+                              }
+                              QScrollBar::add-line:horizontal {
+                                  background: #303030;
+                                  subcontrol-position: right;
+                                  subcontrol-origin: margin;
+                              }
+                              
+                              QScrollBar::sub-line:horizontal {
+                                  background: #303030;
+                                  subcontrol-position: left;
+                                  subcontrol-origin: margin;
+                              }
+                              
+                              QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+                                  background: none;
+                              }"""
 class HighlightRule:
     def __init__(self, pattern, highlight_format):
         self.pattern = pattern
@@ -82,7 +105,7 @@ class Output_textEdit(QTextEdit):
         self.setFrameShape(QFrame.Shape.NoFrame)
         self.setAcceptDrops(True)
         # self.setReadOnly(True)
-        self.setStyleSheet(scroll_bar_stylesheet)
+        self.setStyleSheet(vertical_scroll_bar_stylesheet)
 
         self.highlighter = PythonHighlighter(self.document())
         self.show()
