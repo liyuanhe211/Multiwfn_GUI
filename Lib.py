@@ -198,4 +198,3 @@ def integral_cube_file_splited_by_plain(cube_x_y_z_value_file, plane_origin: np.
     print(all_abs_sum)
     # print(up_square_sum,down_square_sum)
 
-# print(coordinate_from_cube_file(r"D:\Gaussian\LuYong2_2\Alpha_Substrate\Rerun_Confsearch_T1\Pi_to_PiStar\Alpha_Substrate_G15_M001_8_02[Opt_PBE0_DZ]_xtb_Pull_xtb_Pull_Step0_M_[MO_LUMO+346]MOvalue.cub"))
