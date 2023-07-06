@@ -36,7 +36,9 @@
          </property>
          <property name="font">
           <font>
+           <family>Consolas</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -206,7 +208,9 @@ border-bottom-color: #DCDCDC;</string>
        </property>
        <property name="font">
         <font>
+         <family>Consolas</family>
          <pointsize>10</pointsize>
+         <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
         </font>
@@ -259,7 +263,7 @@ border-bottom-color: #DCDCDC;</string>
       </widget>
      </item>
      <item row="0" column="2">
-      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0">
+      <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0,0">
        <item>
         <widget class="QLineEdit" name="input_file_lineEdit">
          <property name="minimumSize">
@@ -270,7 +274,9 @@ border-bottom-color: #DCDCDC;</string>
          </property>
          <property name="font">
           <font>
+           <family>Consolas</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -293,6 +299,22 @@ border-bottom-color: #DCDCDC;</string>
          </property>
          <property name="placeholderText">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="copy_path_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Copy</string>
          </property>
         </widget>
        </item>
@@ -326,7 +348,9 @@ border-bottom-color: #DCDCDC;</string>
          </property>
          <property name="font">
           <font>
+           <family>Consolas</family>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -412,25 +436,6 @@ border-bottom-color: #DCDCDC;</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="execute_macro_pushButton">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::ClickFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(60, 63, 65);</string>
-         </property>
-         <property name="text">
-          <string>Execute</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="step_forward_pushButton">
          <property name="minimumSize">
           <size>
@@ -446,6 +451,25 @@ border-bottom-color: #DCDCDC;</string>
          </property>
          <property name="text">
           <string>Step Forward</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="execute_macro_pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(60, 63, 65);</string>
+         </property>
+         <property name="text">
+          <string>Execute</string>
          </property>
         </widget>
        </item>
@@ -489,7 +513,7 @@ border-bottom-color: #DCDCDC;</string>
        </property>
        <property name="html">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Consolas'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

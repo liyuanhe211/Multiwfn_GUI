@@ -1,0 +1,22 @@
+-11 // Geometry operations
+26 // Show cell info
+0 // Return
+19 // Supercell
+[Input]: Duplicate along a
+[Input]: Duplicate along b
+[Input]: Duplicate along c
+-10 // Return
+-9 // Other settings
+10 // Print Level
+2 // Medium
+14 // Toggle printing orbital energies and occupancies after SCF
+0 // Return
+1 // Method
+6 // PBE0
+2 // Basis Set
+2 // DZVP-MOLOPT-SR-GTH
+3 // Dispersion Correction
+2 // D3-BJ
+-2 // Export Molden for Multiwfn
+-4 // Calculate Atomic Charges
+6 // RESP

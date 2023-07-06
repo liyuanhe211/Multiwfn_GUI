@@ -7,6 +7,7 @@ __author__ = 'LiYuanhe'
 # TODO: Call function的时候参数要就给，不要就不给
 # TODO: 传输命令的时候都做一次str()转换
 # TODO: 显示Multiwfn版本，并在可执行文件中记录
+# TODO: 含[Input]时当前执行到哪一步还是有问题，见SP_PBE0_DZVP
 
 import os.path
 import re
@@ -14,7 +15,7 @@ import shutil
 import time
 
 from Python_Lib.My_Lib_PyQt6 import *
-from Python_Lib.My_Lib_System import process_is_CPU_idle
+from Python_Lib.My_Lib_System import process_is_CPU_idle,addToClipBoard
 from Lib import *
 import Multiwfn
 
@@ -108,6 +109,8 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         connect_once(self.open_GaussView_pushButton, self.open_with_GaussView)
         connect_once(self.output_textEdit.file_dropped, self.file_dropped)
         connect_once(self.load_file_path_pushButton, self.load_file_path)
+        connect_once(self.copy_path_pushButton,self.copy_filepath)
+        connect_once(self.refresh_macro_list_pushButton,self.load_macro_list)
 
         self.launch()
 
@@ -132,6 +135,8 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         connect_once(self.process.readyReadStandardError, lambda process=self.process: self.write_output(self.process))
 
     def load_macro_list(self):
+        clear_layout(self.macro_selector_scrollArea.widget().layout())
+
         for i in self.macro_pushbuttons:
             i.setParent(None)
         self.macro_pushbuttons = []
@@ -182,7 +187,7 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         rets = []
 
         for count, line in enumerate(self.macro_preview):
-            sep = " >>> " if count == self.macro_current_line_no else "  |  "
+            sep = " >>> " if count == self.macro_current_line_no+1 else "  |  "
             # if line.startswith("[Note]"):
             #     line = left_strip_sequence_from_str(line, "[Note] ")
             #     line = left_strip_sequence_from_str(line, "[Note]")
@@ -207,9 +212,13 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
             log_file_object.write(text.replace('\r\n', '\n'))  # 不知道为什么不replace就会变成两行
             log_file_object.write("----------------------------------\n")
 
-        self.output_textEdit.insertPlainText(text)
+        # Move cursor to end before inserting new text
         cursor = self.output_textEdit.textCursor()
         cursor.movePosition(cursor.MoveOperation.End)
+        self.output_textEdit.setTextCursor(cursor)
+        self.output_textEdit.insertPlainText(text)
+        cursor.movePosition(cursor.MoveOperation.End)
+        self.output_textEdit.setTextCursor(cursor)
 
         vertical_scroll_to_end(self.output_textEdit)
 
@@ -235,6 +244,12 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
 
         inputs.append(text)
         self.write_text("\n\n>>> " + text + '\n\n\n')
+
+        # If the current script action is a [input] command, step forward when the command is sent.
+        step_forward = False
+        if self.input_lineEdit.placeholderText().lower().startswith("[input]"):
+            step_forward = True
+
         self.input_lineEdit.setText("")
         self.input_lineEdit.setPlaceholderText("Input command...")
 
@@ -249,6 +264,9 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         command_history = [number_format.format(count + 1) + " |  " + line for count, line in enumerate(inputs)]
         self.command_history_textEdit.setPlainText("\n".join(command_history))
         vertical_scroll_to_end(self.command_history_textEdit)
+
+        if step_forward:
+            self.step_forward()
 
     def file_dropped(self, filepath):
         filepath = filepath.strip().strip('"')
@@ -282,6 +300,9 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         input_path = filename_class(get_input_filename()).path
         filename = get_save_file_UI(self, input_path, "txt", "Save Output")
         self.save_output(filename)
+
+    def copy_filepath(self):
+        addToClipBoard(self.input_file_lineEdit.text().removeprefix("Input file: "))
 
     def open_with_GaussView(self):
         input_filename = get_input_filename()
@@ -318,6 +339,11 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         self.reboot_pushButton.setText("Reboot")
 
     def step_forward(self):
+        """
+
+        :return: True if normal action, False if [input] action needed, None if no next step available
+        """
+
         disconnect_all(self.step_forward_pushButton, self.step_forward)
         self.macro_current_line_no += 1
         self.show_macro_preview()
@@ -345,7 +371,7 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
         if command.lower().startswith("[input]"):
             self.input_lineEdit.setPlaceholderText(command)
             self.input_lineEdit.setFocus()
-            return True
+            return False
 
         self.input_lineEdit.setText(str(command))
         self.input_lineEdit.returnPressed.emit()
@@ -355,7 +381,10 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
     def execute(self):
         while True:
             Application.processEvents()
-            if self.step_forward() is None:
+            ret = self.step_forward()
+            if ret is None:
+                break
+            if ret is False:
                 break
 
     def batch_run(self):

@@ -55,6 +55,8 @@ horizontal_scroll_bar_stylesheet = """QScrollBar:horizontal {
                               QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
                                   background: none;
                               }"""
+
+
 class HighlightRule:
     def __init__(self, pattern, highlight_format):
         self.pattern = pattern
@@ -141,9 +143,9 @@ class Macro_Pushbutton(Ui_Multiwfn_Pushbutton, QtWidgets.QWidget, Qt_Widget_Comm
         self.setupUi(self)
 
         filepath = os.path.abspath(filepath)
-        rel_path = os.path.relpath(filepath,filename_class(os.path.abspath(__file__)).path)
+        rel_path = os.path.relpath(filepath, filename_class(os.path.abspath(__file__)).path)
 
-        name_stem = left_strip_sequence_from_str(filename_class(rel_path).only_remove_append,"Command_Macros/")
+        name_stem = left_strip_sequence_from_str(filename_class(rel_path).only_remove_append, "Command_Macros/")
         extension = filename_class(filepath).append
         self.filepath = filepath
         if extension.lower() == 'py':
