@@ -8,6 +8,11 @@ __author__ = 'LiYuanhe'
 # TODO: 传输命令的时候都做一次str()转换
 # TODO: 显示Multiwfn版本，并在可执行文件中记录
 # TODO: 含[Input]时当前执行到哪一步还是有问题，见SP_PBE0_DZVP
+# TODO: Settings. Changes
+# TODO: Change Setting in Macro and Change it back after used
+# TODO: 显示Settings.ini有哪些改动
+# TODO: 重启慢
+# TODO： 拖拽功能也给输入的lineedit一份
 
 import os.path
 import re
@@ -59,7 +64,16 @@ def move_generated_files():
         print("No input file loaded in the last session. No clean up done.")
 
     print("Deleting temp folder:", temp_folder)
-    shutil.rmtree(temp_folder)
+    try:
+        shutil.rmtree(temp_folder)
+    except PermissionError as e:
+        # time.sleep(0.5)
+        try:
+            shutil.rmtree(temp_folder)
+        except PermissionError as e:
+            traceback.print_exc()
+            print(e)
+            print("Did not delete temp folder:", temp_folder,'. Delete it manually')
 
 
 class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
@@ -320,6 +334,7 @@ class Multiwfn_GUI(Ui_Multiwfn_GUI_Form, QWidget, Qt_Widget_Common_Functions):
             self.open_GaussView_pushButton.setText("GView Not Found")
 
     def reboot(self):
+        self.macro_current_line_no = -1
         self.wait_idle()
         self.reboot_pushButton.setText("Rebooting...")
         self.process.setWorkingDirectory(filename_class(__file__).path)

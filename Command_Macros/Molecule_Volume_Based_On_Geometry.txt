@@ -1,0 +1,5 @@
+[Note] Calculate molecule volume based on geometry alone
+[Note] Set
+100
+3
+15
